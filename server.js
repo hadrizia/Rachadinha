@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const forceSsl = require('force-ssl-heroku');
 const logger = require('heroku-logger');
 
@@ -7,6 +8,9 @@ const deputados = require('./server/routes/deputados');
 const app = express();
 app.use(forceSsl);
 
+app.get("/api", (req, res) => {
+    res.status(200).send("API da rachadinha");
+});
 app.use('/api/deputados', deputados);
 
 // Set static folder
