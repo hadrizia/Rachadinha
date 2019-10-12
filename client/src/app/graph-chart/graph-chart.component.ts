@@ -77,6 +77,7 @@ export class GraphChartComponent implements AfterContentInit {
       .data(nodes)
       .join("circle")
       .attr("r", 5)
+      .attr("id", (d) => d.nome)
       .attr("fill", (d) => color(d));
 
     simulation.on("tick", () => {

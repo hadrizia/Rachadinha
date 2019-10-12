@@ -1,6 +1,13 @@
 <div class="container">
   <!-- <app-graph-chart [data]="data"></app-graph-chart> -->
-  <div *ngFor="let deputado of deputados">
-    {{ deputado.nome }}
+
+  <div class="input-group input-group-lg">
+    <input id="search-deputado"
+      type="text"
+      class="form-control "
+      [(ngModel)]="deputado"
+      [ngbTypeahead]="search"
+      [inputFormatter]="formatter"
+      [resultFormatter]="formatter"/>
   </div>
 </div>

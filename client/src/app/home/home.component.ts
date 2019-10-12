@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+
 import { Deputado } from '../models/deputado.model';
 import { ApiService } from '../services/api.service';
 
@@ -12,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   data: any;
   deputados: Deputado[];
+  public deputado: Deputado;
 
   constructor(private apiService: ApiService) { }
 
@@ -23,17 +27,16 @@ export class HomeComponent implements OnInit {
         return 0;
       });
     });
-
-    this.apiService.getNodes().subscribe(nodes => {
-      this.apiService.getLinks().subscribe(links => {
-
-        this.data = {
-          nodes: nodes,
-          links: links
-        }
-
-      })
-    })
   }
+
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.deputados.filter(v => v.nome.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    )
+
+  formatter = (result: Deputado) => result.nome;
 
 }
