@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ApiService } from '../services/api.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,19 +10,25 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   data: any;
+  deputados: any;
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.data = {
-      nodes: [
-        {id: "A", group: 1},
-        {id: "B", group: 1}
-      ],
-      links: [
-        {source: "A", target: "B", value: 1}
-      ]
-    }
+    this.apiService.getDeputados().subscribe(deputados => {
+      this.deputados = deputados;
+    });
+    
+    this.apiService.getNodes().subscribe(nodes => {
+      this.apiService.getLinks().subscribe(links => {
+
+        this.data = {
+          nodes: nodes,
+          links: links
+        }
+
+      })
+    })
   }
 
 }
