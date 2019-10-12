@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "test": "npm test",,
+    "test": "npm test",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/hadrizia/Rachadinha#readme",
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.17.1",
     "force-ssl-heroku": "^1.0.2",
     "heroku-logger": "^0.3.3",
