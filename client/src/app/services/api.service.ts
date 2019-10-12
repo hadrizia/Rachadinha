@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 
+import { Deputado } from 'src/app/models/deputado.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +15,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getDeputados() {
-    return this.http.get(this.url + 'deputados');
+    return this.http.get<Deputado[]>(this.url + 'deputados');
   }
 
   getNodes() {
