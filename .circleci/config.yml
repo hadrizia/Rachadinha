@@ -1,0 +1,25 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.15.1
+    steps:
+      - checkout
+      - run:
+          name: install-npm-dependencies
+          command: 'npm install'
+      - save_cache:
+          key: npm-dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: install-client-npm-dependencies
+          command: 'cd client && npm install && cd ../'
+      - save_cache:
+          key: npm-client-dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./client/node_modules
+      - run:
+          name: build
+          command: 'cd client && npm run build'
+
