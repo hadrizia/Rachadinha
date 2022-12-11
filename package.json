@@ -26,7 +26,7 @@
   "homepage": "https://github.com/hadrizia/Rachadinha#readme",
   "dependencies": {
     "cors": "^2.8.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "force-ssl-heroku": "^1.0.2",
     "heroku-logger": "^0.3.3",
     "mongoose": "^5.7.5",
